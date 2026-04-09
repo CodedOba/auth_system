@@ -274,6 +274,4 @@ This authentication system provides:
 * OAuth (Google login) 🔐
 * Rate limiting & brute-force protection
 
----
 
-**Built for scalable backend systems 🚀**
