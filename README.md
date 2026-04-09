@@ -1,6 +1,6 @@
-# 🔐 Authentication System (Node.js + Express + JWT)
+#  Authentication System (Node.js + Express + JWT)
 
-## 📌 Overview
+##  Overview
 
 This project implements a secure **authentication system** for a backend application. It handles:
 
@@ -13,17 +13,17 @@ This project implements a secure **authentication system** for a backend applica
 
 ---
 
-## 🧠 How It Works (Simple Explanation)
+##  How It Works (Simple Explanation)
 
-1. 👤 User registers → account is created
-2. 🔑 User logs in → receives **Access Token + Refresh Token**
-3. 🛡️ Access Token is used to access protected routes
-4. 🔄 Refresh Token is used to get a new Access Token when it expires
-5. 🚪 Logout → refresh token is removed (user is logged out)
+1.  User registers → account is created
+2.  User logs in → receives **Access Token + Refresh Token**
+3.  Access Token is used to access protected routes
+4.  Refresh Token is used to get a new Access Token when it expires
+5.  Logout → refresh token is removed (user is logged out)
 
 ---
 
-## ⚙️ Technologies Used
+##  Technologies Used
 
 * Node.js
 * Express.js
@@ -33,7 +33,7 @@ This project implements a secure **authentication system** for a backend applica
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```bash
 src/
@@ -59,9 +59,9 @@ src/
 
 ---
 
-## 🔐 Authentication Flow
+##  Authentication Flow
 
-### 1. 📝 Register
+### 1.  Register
 
 **Endpoint**
 
@@ -87,7 +87,7 @@ POST /api/v1/auth/register
 
 ---
 
-### 2. 🔑 Login
+### 2. Login
 
 **Endpoint**
 
@@ -115,7 +115,7 @@ POST /api/v1/auth/login
 
 ---
 
-### 3. 🔄 Refresh Token
+### 3.  Refresh Token
 
 **Endpoint**
 
@@ -138,7 +138,7 @@ POST /api/v1/auth/refresh
 
 ---
 
-### 4. 🚪 Logout
+### 4.  Logout
 
 **Endpoint**
 
@@ -153,7 +153,7 @@ POST /api/v1/auth/logout
 
 ---
 
-## 🛡️ Protected Routes
+##  Protected Routes
 
 Use `authMiddleware` to protect routes:
 
@@ -174,7 +174,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 🔑 Token Structure
+##  Token Structure
 
 ### Access Token
 
@@ -189,17 +189,17 @@ Authorization: Bearer <token>
 
 ---
 
-## ⚠️ Security Best Practices
+##  Security Best Practices
 
 * Hash passwords using bcrypt
-* Never store plain passwords ❌
+* Never store plain passwords 
 * Keep JWT secrets in `.env`
 * Use HTTPS in production
 * Validate user input
 
 ---
 
-## 🧪 Testing (Postman)
+##  Testing (Postman)
 
 ### Headers
 
@@ -215,7 +215,7 @@ GET /api/v1/user/profile
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Install dependencies
 
@@ -240,7 +240,7 @@ npm run dev
 
 ---
 
-## 🎯 Summary
+##  Summary
 
 This authentication system provides:
 
@@ -249,14 +249,4 @@ This authentication system provides:
 * Session persistence using refresh tokens
 * Protected routes with middleware
 * Scalable structure for production apps
-
----
-
-## 💡 Future Improvements
-
-* Email verification 📧
-* Forgot/reset password 🔁
-* OAuth (Google login) 🔐
-* Rate limiting & brute-force protection
-
 
