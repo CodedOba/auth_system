@@ -174,21 +174,6 @@ Authorization: Bearer <token>
 
 ---
 
-## 🧩 Role-Based Authorization
-
-Optional middleware:
-
-```js
-router.post("/admin", authMiddleware, roleMiddleware("admin"), handler);
-```
-
-### What It Does
-
-* Checks user role
-* Allows access only if role matches
-
----
-
 ## 🔑 Token Structure
 
 ### Access Token
