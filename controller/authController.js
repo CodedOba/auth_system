@@ -88,7 +88,7 @@ async function login (req, res) {
         }
 
               const userdata = await User.findOne({ email })
-              
+
               if (!userdata) {
                 return res.status(401).json({
                     success: false,
@@ -110,6 +110,11 @@ async function login (req, res) {
 
       const accesstoken = await jwt.sign({userid: userdata.id}, process.env.JWTKEYS,{expiresIn: "20m"})
         console.log(accesstoken);
+
+     const refreshToken = await jwt.sign( { userid: userdata.id }, process.env.REFRESHTOKENKEY, { expiresIn: "20d" } );
+
+    userdata.refreshToken = refreshToken;
+    await userdata.save();
         
            
         return res.status(200).json({
@@ -133,3 +138,62 @@ async function login (req, res) {
     
 }
 export {login}
+
+const refreshAccessToken = async (req, res) => {
+  const { refreshToken } = req.body;
+  
+  console.log(refreshToken);
+
+  if (!refreshToken) {
+    return res.status(401).json({
+      success: false,
+      message: "No refresh token",
+    });
+  }
+
+  const user = await User.findOne({ refreshToken });
+
+  if (!user)
+    return res.status(403).json({
+      message: "Invalid refresh token",
+    });
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.REFRESHTOKENKEY);
+
+    const newAccessToken = jwt.sign(
+      { id: decoded.id, role: decoded.role },
+      process.env.ACCESSTOKENTKEY, // ✅ FIXED (was wrong before)
+      { expiresIn: "15m" },
+    );
+
+    res.json({
+      accessToken: newAccessToken,
+    });
+
+  } catch (error) {
+    console.log(error);
+    
+    res.status(403).json({
+      success: false,
+      message: "Token expired or invalid",
+    });
+  }
+};
+
+export { refreshAccessToken };
+
+const logout = async (req, res) => {
+
+  const { refreshToken } = req.body;
+
+  // remove token from DB
+  await User.findOneAndUpdate(
+    { refreshToken },
+    { refreshToken: null }
+  );
+
+  res.json({ message: "Logged out successfully" });
+};
+
+export { logout };
