@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This project implements a secure **authentication system** for a backend application (e.g., hotel booking platform). It handles:
+This project implements a secure **authentication system** for a backend application. It handles:
 
 * User registration
 * User login
