@@ -87,16 +87,30 @@ async function login (req, res) {
             
         }
 
-      const userdata = await User.findOne({ email })
-
-
+              const userdata = await User.findOne({ email })
+              
+              if (!userdata) {
+                return res.status(401).json({
+                    success: false,
+                    message: "invalid user"
+                })
+                
+              }
       const comparepassword = await bcrypt.compare(password, userdata.password)
       console.log(comparepassword);
+
+         if (!comparepassword) {
+          return res.status(400).json({
+         success:false,
+        message:"invalid password"
+       })
+    };
       
 
 
-      const accesstoken = await jwt.sign({useid: userdata.id}, process.env.JWTKEYS,{expiresIn: "10m"})
-
+      const accesstoken = await jwt.sign({userid: userdata.id}, process.env.JWTKEYS,{expiresIn: "20m"})
+        console.log(accesstoken);
+        
            
         return res.status(200).json({
             success: true,
