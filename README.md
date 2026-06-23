@@ -1,39 +1,37 @@
-#  Authentication System (Node.js + Express + JWT)
+# 🔐 Authentication System (Node.js + Express + JWT)
 
-##  Overview
-
-This project implements a secure **authentication system** for a backend application. It handles:
-
-* User registration
-* User login
-* Logout
-* Token-based authentication (JWT)
-* Role-based authorization (optional)
-* Refresh token system (for persistent sessions)
+A secure authentication API built with **Node.js**, **Express**, **MongoDB**, and **JSON Web Tokens (JWT)**. This project provides user registration, login, token-based authentication, refresh token support, and protected routes, following best practices for scalable backend applications.
 
 ---
 
-##  How It Works (Simple Explanation)
+## 🚀 Features
 
-1.  User registers → account is created
-2.  User logs in → receives **Access Token + Refresh Token**
-3.  Access Token is used to access protected routes
-4.  Refresh Token is used to get a new Access Token when it expires
-5.  Logout → refresh token is removed (user is logged out)
-
----
-
-##  Technologies Used
-
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
-* JSON Web Tokens (JWT)
-* bcrypt (password hashing)
+- User Registration
+- User Login
+- JWT Authentication
+- Access & Refresh Tokens
+- Protected Routes with Middleware
+- Secure Password Hashing with bcrypt
+- User Logout
+- Session Persistence
+- Scalable Folder Structure
+- Production-ready Authentication Flow
 
 ---
 
-##  Project Structure
+## 🛠️ Tech Stack
+
+- **Node.js**
+- **Express.js**
+- **MongoDB**
+- **Mongoose**
+- **JSON Web Token (JWT)**
+- **bcrypt**
+- **dotenv**
+
+---
+
+## 📂 Project Structure
 
 ```bash
 src/
@@ -59,9 +57,9 @@ src/
 
 ---
 
-##  Authentication Flow
+## 🔄 Authentication Flow
 
-### 1.  Register
+### 1. Register User
 
 **Endpoint**
 
@@ -69,7 +67,7 @@ src/
 POST /api/v1/auth/register
 ```
 
-**Request Body**
+#### Request Body
 
 ```json
 {
@@ -80,14 +78,14 @@ POST /api/v1/auth/register
 }
 ```
 
-**What Happens**
+#### Process
 
-* Password is hashed using bcrypt
-* User is saved in the database
+- Password is hashed using bcrypt.
+- User data is stored in MongoDB.
 
 ---
 
-### 2. Login
+### 2. Login User
 
 **Endpoint**
 
@@ -95,7 +93,7 @@ POST /api/v1/auth/register
 POST /api/v1/auth/login
 ```
 
-**Request Body**
+#### Request Body
 
 ```json
 {
@@ -104,18 +102,17 @@ POST /api/v1/auth/login
 }
 ```
 
-**What Happens**
+#### Process
 
-* Password is compared using bcrypt
-* If valid:
-
-  * Access Token is generated (short-lived)
-  * Refresh Token is generated (long-lived)
-* Tokens are sent to the user
+- Password is verified.
+- Generates:
+  - Access Token (short-lived)
+  - Refresh Token (long-lived)
+- Tokens are returned to the client.
 
 ---
 
-### 3.  Refresh Token
+### 3. Refresh Access Token
 
 **Endpoint**
 
@@ -123,7 +120,7 @@ POST /api/v1/auth/login
 POST /api/v1/auth/refresh
 ```
 
-**Request Body**
+#### Request Body
 
 ```json
 {
@@ -131,14 +128,14 @@ POST /api/v1/auth/refresh
 }
 ```
 
-**What Happens**
+#### Process
 
-* Backend verifies refresh token
-* Generates new access token
+- Refresh token is verified.
+- A new access token is generated.
 
 ---
 
-### 4.  Logout
+### 4. Logout User
 
 **Endpoint**
 
@@ -146,64 +143,68 @@ POST /api/v1/auth/refresh
 POST /api/v1/auth/logout
 ```
 
-**What Happens**
+#### Process
 
-* Refresh token is removed from database
-* User session is invalidated
+- Refresh token is removed.
+- User session is invalidated.
 
 ---
 
-##  Protected Routes
+## 🔒 Protected Routes
 
-Use `authMiddleware` to protect routes:
+Protect routes using the authentication middleware:
 
-```js
+```javascript
 router.get("/profile", authMiddleware, getUserProfile);
 ```
 
-### How It Works
+### Authorization Header
 
-* Reads token from header:
-
-```txt
-Authorization: Bearer <token>
+```text
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-* Verifies token
-* Attaches user info to `req.user`
+### Middleware Workflow
+
+1. Extract token from request header.
+2. Verify JWT token.
+3. Attach authenticated user to `req.user`.
+4. Continue to protected route.
 
 ---
 
-##  Token Structure
+## 🎫 Token Structure
 
 ### Access Token
 
-* Short lifespan (e.g., 15 minutes)
-* Used for API requests
+- Short lifespan (typically 15 minutes)
+- Used for authenticated API requests
 
 ### Refresh Token
 
-* Long lifespan
-* Stored in DB
-* Used to generate new access tokens
+- Long lifespan
+- Stored securely
+- Used to generate new access tokens
 
 ---
 
-##  Security Best Practices
+## 📌 API Endpoints
 
-* Hash passwords using bcrypt
-* Never store plain passwords 
-* Keep JWT secrets in `.env`
-* Use HTTPS in production
-* Validate user input
+| Method | Endpoint | Description |
+|----------|----------|-------------|
+| POST | `/api/v1/auth/register` | Register a new user |
+| POST | `/api/v1/auth/login` | Login user |
+| POST | `/api/v1/auth/refresh` | Generate new access token |
+| POST | `/api/v1/auth/logout` | Logout user |
+| GET | `/api/v1/user/profile` | Access protected profile |
 
 ---
 
-##  Testing (Postman)
+## 🧪 Testing with Postman
 
 ### Headers
 
-```txt
+```text
 Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
@@ -215,15 +216,31 @@ GET /api/v1/user/profile
 
 ---
 
-##  Getting Started
+## ⚙️ Installation
 
-### 1. Install dependencies
+### Clone the repository
+
+```bash
+git clone https://github.com/yourusername/authentication-system.git
+```
+
+### Navigate into the project
+
+```bash
+cd authentication-system
+```
+
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Setup environment variables
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the root directory:
 
 ```env
 PORT=5000
@@ -232,21 +249,64 @@ JWT_SECRET=your_access_secret
 JWT_REFRESH_SECRET=your_refresh_secret
 ```
 
-### 3. Run server
+---
+
+## ▶️ Running the Application
+
+Development mode:
 
 ```bash
 npm run dev
 ```
 
+Production mode:
+
+```bash
+npm start
+```
+
 ---
 
-##  Summary
+## 🔐 Security Best Practices
 
-This authentication system provides:
+- Hash passwords using bcrypt.
+- Never store plain-text passwords.
+- Store secrets in environment variables.
+- Validate user input.
+- Use HTTPS in production.
+- Use short-lived access tokens.
+- Implement refresh token rotation for enhanced security.
 
-* Secure login & registration
-* Token-based authentication
-* Session persistence using refresh tokens
-* Protected routes with middleware
-* Scalable structure for production apps
+---
 
+## 📈 Future Improvements
+
+- Email Verification
+- Forgot Password Functionality
+- Password Reset via Email
+- OAuth Authentication (Google, GitHub)
+- Rate Limiting
+- Two-Factor Authentication (2FA)
+- Role-Based Access Control (RBAC)
+
+---
+
+## 👨‍💻 Author
+
+**Confession Unseen**
+
+Backend Developer | Node.js | Express | MongoDB
+
+GitHub: https://github.com/CodedOba
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, consider giving it a **star ⭐** on GitHub.
