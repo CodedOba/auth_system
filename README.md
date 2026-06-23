@@ -200,7 +200,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
 
 ---
 
-## 🧪 Testing with Postman
+
 
 ### Headers
 
@@ -238,7 +238,7 @@ npm install
 
 ---
 
-## 🔑 Environment Variables
+##  Environment Variables
 
 Create a `.env` file in the root directory:
 
@@ -277,36 +277,4 @@ npm start
 - Use short-lived access tokens.
 - Implement refresh token rotation for enhanced security.
 
----
-
-## 📈 Future Improvements
-
-- Email Verification
-- Forgot Password Functionality
-- Password Reset via Email
-- OAuth Authentication (Google, GitHub)
-- Rate Limiting
-- Two-Factor Authentication (2FA)
-- Role-Based Access Control (RBAC)
-
----
-
-## 👨‍💻 Author
-
-**Confession Unseen**
-
-Backend Developer | Node.js | Express | MongoDB
-
-GitHub: https://github.com/CodedOba
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## ⭐ Support
-
-If you found this project helpful, consider giving it a **star ⭐** on GitHub.
+iving it a **star ⭐** on GitHub.
