@@ -1,4 +1,4 @@
-# 🔐 Authentication System (Node.js + Express + JWT)
+#  Authentication System (Node.js + Express + JWT)
 
 A secure authentication API built with **Node.js**, **Express**, **MongoDB**, and **JSON Web Tokens (JWT)**. This project provides user registration, login, token-based authentication, refresh token support, and protected routes, following best practices for scalable backend applications.
 
@@ -41,13 +41,14 @@ src/
 │
 ├── models/
 │   └── user.js
-│
+     └── product.js
 ├── routes/
 │   └── authRoutes.js
+     └── productRoute.js
 │
 ├── middlewares/
 │   ├── authMiddleware.js
-│   └── roleMiddleware.js
+│   
 │
 ├── config/
 │   └── db.js
@@ -150,17 +151,8 @@ POST /api/v1/auth/logout
 
 ---
 
-## 🔒 Protected Routes
-
-Protect routes using the authentication middleware:
-
-```javascript
-router.get("/profile", authMiddleware, getUserProfile);
-```
-
 ### Authorization Header
 
-```text
 Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
